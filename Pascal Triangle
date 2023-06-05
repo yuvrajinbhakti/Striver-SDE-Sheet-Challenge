@@ -1,0 +1,32 @@
+CodeStudio Question Link -> https://www.codingninjas.com/codestudio/problems/pascal-s-triangle_8230805?challengeSlug=striver-sde-challenge
+
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<vector<long long int>> printPascal(int n) {
+    vector<vector<long long int>> triangle;
+
+    // Base case: If n is 0, return an empty triangle
+    if (n == 0)
+        return triangle;
+
+    // First row
+    triangle.push_back({1});
+
+    // Generating Pascal's triangle
+    for (int i = 1; i < n; i++) {
+        vector<long long int> row(i + 1, 0);
+        row[0] = 1; // First element of each row is 1
+
+        for (int j = 1; j < i; j++) {
+            // Each element in the row (except the first and last) is the sum of the two elements above it
+            row[j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+        }
+
+        row[i] = 1; // Last element of each row is 1
+
+        triangle.push_back(row);
+    }
+
+    return triangle;
+}
