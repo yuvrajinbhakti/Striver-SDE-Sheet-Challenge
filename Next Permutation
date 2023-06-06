@@ -1,0 +1,32 @@
+//CodeStudio Link ->  https://www.codingninjas.com/codestudio/problems/next-permutation_8230741?challengeSlug=striver-sde-challenge
+
+#include <bits/stdc++.h> 
+
+vector<int> nextPermutation(vector<int> &permutation,int n) {    
+    
+    // Step 1: Find the first pair (i, i+1) where permutation[i] < permutation[i+1]
+    int i = n - 2;
+    while (i >= 0 && permutation[i] >= permutation[i + 1]) {
+        i--;
+    }
+    
+    // Step 2: If there is no such pair, return the first permutation
+    if (i < 0) {
+        reverse(permutation.begin(), permutation.end());
+        return permutation;
+    }
+    
+    // Step 3: Find the smallest element to the right of permutation[i] that is greater than permutation[i]
+    int j = n - 1;
+    while (j > i && permutation[j] <= permutation[i]) {
+        j--;
+    }
+    
+    // Step 4: Swap elements permutation[i] and permutation[j]
+    swap(permutation[i], permutation[j]);
+    
+    // Step 5: Reverse the subsequence from i+1 to the end of the sequence
+    reverse(permutation.begin() + i + 1, permutation.end());
+    
+    return permutation;
+}
