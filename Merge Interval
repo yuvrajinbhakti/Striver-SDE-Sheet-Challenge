@@ -1,0 +1,53 @@
+//CodeStudio Question Link ->  https://www.codingninjas.com/codestudio/problems/merge-intervals_8230700?challengeSlug=striver-sde-challenge&leftPanelTab=1
+
+#include <bits/stdc++.h> 
+/*
+
+    intervals[i][0] = start point of i'th interval
+    intervals[i][1] = finish point of i'th interval
+
+*/
+
+
+
+
+
+/*
+
+Approach
+What we are going to do is first we will push the first interval in the vector and will iterate over all the other intervals in the array.
+
+considering each interval[a,b] in the array we will check if the start of the interval is smaller than the end of the last interval[x,y] present in our vector i.e. y>a
+if it is so then we will update the end value we will update the end value y with max(y,b)
+
+if y!>a then we will simply push the interval in the vector
+
+follow the same steps for rest of the array elements and return the vector after reaching at the end
+
+Dry Run:
+Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+1 ) push(1,3) int the ans vector
+
+2 ) check if end point of the last interval present in the ans vector is greater than the start point of the next interval if(ans.back()[1] >= intervals[i][0]) i.e. if(3>=2) ...if yes then update the end point of the last interval of the vector..ans.back()[1] = max(ans.back()[1] , intervals[i][1]); i.e max(3,6)
+now out vector ans = {(1,6)}
+
+if(ans.back()[1] >= intervals[i][0]) is now true then simply push that element int ans vector
+
+3)follow step 2 for all other elements of interval array and return ans at the end of the program
+*/
+
+    
+    
+    vector<vector<int>> mergeIntervals(vector<vector<int>>& intervals)
+    {
+        if(intervals.size()<=1) return intervals;
+        sort(intervals.begin(), intervals.end());
+        vector<vector<int>> ans;
+        ans.push_back(intervals[0]);
+        for(int i=1;i<intervals.size();i++)
+        {
+            if(ans.back()[1] >= intervals[i][0]) ans.back()[1] = max(ans.back()[1] , intervals[i][1]);
+            else ans.push_back(intervals[i]); 
+        }
+        return ans;
+    }
