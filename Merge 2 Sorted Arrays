@@ -1,0 +1,25 @@
+//CodeStudio Question Link -> codingninjas.com/codestudio/problems/merge-two-sorted-arrays_8230835?challengeSlug=striver-sde-challenge&leftPanelTab=1
+
+
+#include <bits/stdc++.h>
+
+vector<int> ninjaAndSortedArrays(vector<int>& nums1, vector<int>& nums2, int m, int n) {
+     //Piche Se Dalna PAdega
+    int n1=m-1;
+    int n2=n-1;
+    int i=m+n-1;   //Num1 ka piche Se Ghusane ke liye
+    while(n1>=0 && n2>=0){
+        if(nums1[n1]>nums2[n2]){
+            nums1[i--]=nums1[n1--];    //Bade Vale Number Ko Piche Dalo
+        }
+        else{
+            nums1[i--]=nums2[n2--];    
+        }
+    }
+    
+    while(n2>=0){
+        nums1[i--]=nums2[n2--];       
+    }
+    return nums1;
+}   
+    
